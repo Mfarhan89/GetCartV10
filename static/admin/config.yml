@@ -6,12 +6,12 @@ media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 site_url: "https://jamm.matter.design"
-logo_url: "/images/logo.png" # Update if you have your logo
+logo_url: "/images/logo.png"
 
 locale: "en"
 
 collections:
-  # Editable pages (all .js and .md files in src/pages)
+  # Editable Markdown/MDX pages: all top-level and nested pages in src/pages
   - name: "pages"
     label: "Pages"
     label_singular: "Page"
@@ -22,24 +22,11 @@ collections:
     slug: "{{slug}}"
     preview_path: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Layout", name: "layout", widget: "string", required: false, hint: "Layout component to use. Example: default, product, account" }
+      - { label: "Title", name: "title", widget: "string", required: false }
+      - { label: "Layout", name: "layout", widget: "string", required: false, hint: "Layout component (optional)" }
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # Editable components (reusable sections)
-  - name: "components"
-    label: "Components"
-    folder: "src/components"
-    create: true
-    extension: "js"
-    format: "frontmatter"
-    slug: "{{slug}}"
-    fields:
-      - { label: "Component Name", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown", required: false }
-      - { label: "Props (JSON)", name: "props", widget: "text", required: false, hint: "Edit component props as JSON if used" }
-
-  # Products (if using headless product data in src/products)
+  # Editable Products (if using headless product data in src/products)
   - name: "products"
     label: "Products"
     label_singular: "Product"
@@ -54,48 +41,67 @@ collections:
       - { label: "Price", name: "price", widget: "number" }
       - { label: "Image", name: "image", widget: "image" }
 
-  # Navigation and footer config (src/config.json)
+  # Editable navigation and footer links (src/config.json)
   - name: "site_config"
-    label: "Site Config"
+    label: "Site Navigation & Footer"
     files:
       - file: "src/config.json"
         label: "Navigation & Footer"
         name: "navigation_footer"
         fields:
-          - { label: "Header Links", name: "headerLinks", widget: "list", fields: [
-                { label: "Label", name: "menuLabel", widget: "string" },
-                { label: "URL", name: "menuLink", widget: "string" },
-                { label: "Category", name: "category", widget: "list", required: false, fields: [
-                    { label: "Category Label", name: "categoryLabel", widget: "string" },
-                    { label: "Submenu", name: "submenu", widget: "list", fields: [
-                        { label: "Menu Label", name: "menuLabel", widget: "string" },
-                        { label: "Menu Link", name: "menuLink", widget: "string" }
-                    ]}
-                ]}
-            ]
-          }
-          - { label: "Footer Links", name: "footerLinks", widget: "list", fields: [
-                { label: "Column Label", name: "subTitle", widget: "string" },
-                { label: "Links", name: "links", widget: "list", fields: [
-                    { label: "Text", name: "text", widget: "string" },
-                    { label: "URL", name: "link", widget: "string" }
-                ]}
-            ]
-          }
+          - label: "Header Links"
+            name: "headerLinks"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "menuLabel", widget: "string" }
+              - { label: "URL", name: "menuLink", widget: "string" }
+              - label: "Category"
+                name: "category"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Category Label", name: "categoryLabel", widget: "string" }
+                  - label: "Submenu"
+                    name: "submenu"
+                    widget: "list"
+                    fields:
+                      - { label: "Menu Label", name: "menuLabel", widget: "string" }
+                      - { label: "Menu Link", name: "menuLink", widget: "string" }
+          - label: "Footer Links"
+            name: "footerLinks"
+            widget: "list"
+            fields:
+              - { label: "Column Label", name: "subTitle", widget: "string" }
+              - label: "Links"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "Text", name: "text", widget: "string" }
+                  - { label: "URL", name: "link", widget: "string" }
 
-  # Theme (brand colors, fonts, etc. stored in src/components/Layout/Globals.css)
+  # Branding and theme settings (CSS Variables)
   - name: "theme"
     label: "Theme Styles"
     files:
       - file: "src/components/Layout/Globals.css"
-        label: "Global CSS"
+        label: "Global Theme CSS"
         name: "globals_css"
         fields:
           - { label: "CSS Variables", name: "css", widget: "code", default_language: "css" }
 
-  # Optionally: Add custom content types like blog, testimonials, etc. by adding new collections
+  # README content (for info, editing, and documentation in CMS)
+  - name: "readme"
+    label: "ReadMe & Documentation"
+    files:
+      - file: "README.md"
+        label: "Project README"
+        name: "readme_md"
+        fields:
+          - { label: "Markdown Content", name: "body", widget: "markdown" }
 
-# CMS appearance (optional)
+  # Add more collections for other folders/files as needed
+
+# Optional: style the CMS to match your theme
 editor:
   preview: false
   styles:
