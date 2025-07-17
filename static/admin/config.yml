@@ -11,7 +11,6 @@ logo_url: "/images/logo.png"
 locale: "en"
 
 collections:
-  # Editable Markdown/MDX pages: all top-level and nested pages in src/pages
   - name: "pages"
     label: "Pages"
     label_singular: "Page"
@@ -23,10 +22,9 @@ collections:
     preview_path: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string", required: false }
-      - { label: "Layout", name: "layout", widget: "string", required: false, hint: "Layout component (optional)" }
+      - { label: "Layout", name: "layout", widget: "string", required: false, hint: "Page layout (optional)" }
       - { label: "Body", name: "body", widget: "markdown" }
 
-  # Editable Products (if using headless product data in src/products)
   - name: "products"
     label: "Products"
     label_singular: "Product"
@@ -41,7 +39,6 @@ collections:
       - { label: "Price", name: "price", widget: "number" }
       - { label: "Image", name: "image", widget: "image" }
 
-  # Editable navigation and footer links (src/config.json)
   - name: "site_config"
     label: "Site Navigation & Footer"
     files:
@@ -79,7 +76,6 @@ collections:
                   - { label: "Text", name: "text", widget: "string" }
                   - { label: "URL", name: "link", widget: "string" }
 
-  # Branding and theme settings (CSS Variables)
   - name: "theme"
     label: "Theme Styles"
     files:
@@ -89,7 +85,17 @@ collections:
         fields:
           - { label: "CSS Variables", name: "css", widget: "code", default_language: "css" }
 
-  # README content (for info, editing, and documentation in CMS)
+  - name: "components"
+    label: "Components"
+    folder: "src/components"
+    create: true
+    extension: "js"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - { label: "Component Name", name: "title", widget: "string" }
+      - { label: "Component Code", name: "body", widget: "code", default_language: "javascript" }
+
   - name: "readme"
     label: "ReadMe & Documentation"
     files:
@@ -99,9 +105,6 @@ collections:
         fields:
           - { label: "Markdown Content", name: "body", widget: "markdown" }
 
-  # Add more collections for other folders/files as needed
-
-# Optional: style the CMS to match your theme
 editor:
   preview: false
   styles:
