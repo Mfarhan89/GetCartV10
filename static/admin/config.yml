@@ -5,16 +5,48 @@ backend:
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
+site_url: "https://jamm.matter.design"
+logo_url: "/images/logo.png" # Update this to your theme’s logo if available
+
+locale: "en"
+
+display_url: "https://jamm.matter.design"
+show_preview_links: true
+
+# Theme-specific UI customization
+theme:
+  colors:
+    primary: "#000000"       # --standard-black
+    accent: "#B59F66"        # --standard-gold
+    dark_grey: "#545250"     # --standard-dark-grey
+    light_grey: "#FCFAF6"    # --standard-light-grey
+  font:
+    header: "'Inria Serif', serif"
+    body: "'Inter', sans-serif"
+
 collections:
-  - name: "products"
-    label: "Products"
-    folder: "static/products"
+  - name: "pages"
+    label: "Pages"
+    folder: "src/pages"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Product Name", name: "title", widget: "string" }
-      - { label: "Price", name: "price", widget: "number" }
-      - { label: "SKU", name: "sku", widget: "string" }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Category", name: "category", widget: "string" }
-      - { label: "Description", name: "body", widget: "markdown" }
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: "products"
+    label: "Products"
+    folder: "src/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Product Name", name: "title", widget: "string"}
+      - {label: "Description", name: "body", widget: "markdown"}
+      - {label: "Price", name: "price", widget: "number"}
+      - {label: "Featured Image", name: "image", widget: "image"}
+  # Add more collections as needed for your site
+
+# Optional: customize editor or preview styles
+editor:
+  preview: true
+  styles:
+    - "/components/Layout/Globals.css"
