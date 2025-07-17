@@ -1,0 +1,19 @@
+{
+  "features": [
+    {
+      "icon": "/images/uploads/icon-shipping.svg",
+      "title": "Free Shipping",
+      "description": "Enjoy free shipping worldwide on all orders."
+    },
+    {
+      "icon": "/images/uploads/icon-quality.svg",
+      "title": "Premium Quality",
+      "description": "Our products are crafted from the finest materials."
+    },
+    {
+      "icon": "/images/uploads/icon-support.svg",
+      "title": "24/7 Support",
+      "description": "We’re always here to help, day or night."
+    }
+  ]
+}
