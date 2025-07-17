@@ -3,5 +3,12 @@ module.exports = {
     title: `Gatsby Sydney Ecommerce Theme`,
     siteUrl: `https://jamm.matter.design`,
   },
-  plugins: [],
+  plugins: [
+    {
+    resolve: `gatsby-plugin-netlify-cms`,
+    options: {
+      modulePath: `${__dirname}/src/cms/cms.js`,
+    },
+  },
+  ],
 };
