@@ -5,39 +5,64 @@ backend:
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
-site_url: "https://jamm.matter.design"
+site_url: "https://getcartv10.netlify.app"
 logo_url: "/images/logo.png"
 
 locale: "en"
 
 collections:
-  - name: "pages"
-    label: "Pages"
-    label_singular: "Page"
-    folder: "src/pages"
-    create: true
-    extension: "mdx"
-    format: "frontmatter"
-    slug: "{{slug}}"
-    preview_path: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string", required: false }
-      - { label: "Layout", name: "layout", widget: "string", required: false, hint: "Page layout (optional)" }
-      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "homepage"
+    label: "Homepage Content"
+    files:
+      - file: "src/contents/hero.json"
+        label: "Hero Banner"
+        name: "hero"
+        fields:
+          - { label: "Background Image", name: "backgroundImage", widget: "image" }
+          - { label: "Headline", name: "headline", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "string" }
+          - { label: "Button Text", name: "buttonText", widget: "string" }
+          - { label: "Button Link", name: "buttonLink", widget: "string" }
+      - file: "src/contents/features.json"
+        label: "Homepage Features"
+        name: "features"
+        fields:
+          - label: "Features"
+            name: "features"
+            widget: "list"
+            fields:
+              - { label: "Icon", name: "icon", widget: "image", required: false }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "string" }
 
-  - name: "products"
-    label: "Products"
-    label_singular: "Product"
-    folder: "src/products"
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "src/blog"
     create: true
     extension: "md"
     format: "frontmatter"
     slug: "{{slug}}"
+    preview_path: "blog/{{slug}}"
     fields:
-      - { label: "Product Name", name: "title", widget: "string" }
-      - { label: "Description", name: "body", widget: "markdown" }
-      - { label: "Price", name: "price", widget: "number" }
-      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Category", name: "category", widget: "string", required: false }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "blog_page"
+    label: "Blog Page Settings"
+    files:
+      - file: "src/contents/blogPage.json"
+        label: "Blog Landing"
+        name: "blogPage"
+        fields:
+          - { label: "Heading", name: "heading", widget: "string" }
+          - { label: "Subheading", name: "subheading", widget: "string", required: false }
+          - { label: "Banner Image", name: "bannerImage", widget: "image", required: false }
 
   - name: "site_config"
     label: "Site Navigation & Footer"
@@ -46,24 +71,15 @@ collections:
         label: "Navigation & Footer"
         name: "navigation_footer"
         fields:
+          - { label: "Announcement Bar", name: "announcement", widget: "string", required: false }
+          - { label: "Logo Text", name: "logoText", widget: "string", required: false }
+          - { label: "Logo Image", name: "logoImage", widget: "image", required: false }
           - label: "Header Links"
             name: "headerLinks"
             widget: "list"
             fields:
               - { label: "Label", name: "menuLabel", widget: "string" }
               - { label: "URL", name: "menuLink", widget: "string" }
-              - label: "Category"
-                name: "category"
-                widget: "list"
-                required: false
-                fields:
-                  - { label: "Category Label", name: "categoryLabel", widget: "string" }
-                  - label: "Submenu"
-                    name: "submenu"
-                    widget: "list"
-                    fields:
-                      - { label: "Menu Label", name: "menuLabel", widget: "string" }
-                      - { label: "Menu Link", name: "menuLink", widget: "string" }
           - label: "Footer Links"
             name: "footerLinks"
             widget: "list"
@@ -76,36 +92,15 @@ collections:
                   - { label: "Text", name: "text", widget: "string" }
                   - { label: "URL", name: "link", widget: "string" }
 
-  - name: "theme"
-    label: "Theme Styles"
-    files:
-      - file: "src/components/Layout/Globals.css"
-        label: "Global Theme CSS"
-        name: "globals_css"
-        fields:
-          - { label: "CSS Variables", name: "css", widget: "code", default_language: "css" }
-
-  - name: "components"
-    label: "Components"
-    folder: "src/components"
+  - name: "pages"
+    label: "Pages"
+    label_singular: "Page"
+    folder: "src/pages"
     create: true
-    extension: "js"
+    extension: "md"
     format: "frontmatter"
     slug: "{{slug}}"
+    preview_path: "{{slug}}"
     fields:
-      - { label: "Component Name", name: "title", widget: "string" }
-      - { label: "Component Code", name: "body", widget: "code", default_language: "javascript" }
-
-  - name: "readme"
-    label: "ReadMe & Documentation"
-    files:
-      - file: "README.md"
-        label: "Project README"
-        name: "readme_md"
-        fields:
-          - { label: "Markdown Content", name: "body", widget: "markdown" }
-
-editor:
-  preview: false
-  styles:
-    - "/components/Layout/Globals.css"
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
