@@ -1,0 +1,27 @@
+{
+  "announcement": "Free shipping worldwide",
+  "logoText": "CartV10",
+  "logoImage": "/images/logo.png",
+  "headerLinks": [
+    { "menuLabel": "Home", "menuLink": "/" },
+    { "menuLabel": "Shop", "menuLink": "/shop" },
+    { "menuLabel": "Blog", "menuLink": "/blog" },
+    { "menuLabel": "Contact", "menuLink": "/contact" }
+  ],
+  "footerLinks": [
+    {
+      "subTitle": "Company",
+      "links": [
+        { "text": "About Us", "link": "/about" },
+        { "text": "Contact", "link": "/contact" }
+      ]
+    },
+    {
+      "subTitle": "Support",
+      "links": [
+        { "text": "Shipping Policy", "link": "/shipping" },
+        { "text": "Terms of Service", "link": "/terms" }
+      ]
+    }
+  ]
+}
