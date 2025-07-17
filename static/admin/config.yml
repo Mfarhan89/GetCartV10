@@ -6,23 +6,40 @@ media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
 site_url: "https://jamm.matter.design"
-logo_url: "/images/logo.png" # Update this if you have a logo
+logo_url: "/images/logo.png" # Update if you have your logo
 
 locale: "en"
 
 collections:
+  # Editable pages (all .js and .md files in src/pages)
   - name: "pages"
     label: "Pages"
     label_singular: "Page"
     folder: "src/pages"
     create: true
-    extension: "md"
+    extension: "mdx"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    preview_path: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Layout", name: "layout", widget: "string", required: false, hint: "Layout component to use. Example: default, product, account" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Editable components (reusable sections)
+  - name: "components"
+    label: "Components"
+    folder: "src/components"
+    create: true
+    extension: "js"
     format: "frontmatter"
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Component Name", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+      - { label: "Props (JSON)", name: "props", widget: "text", required: false, hint: "Edit component props as JSON if used" }
 
+  # Products (if using headless product data in src/products)
   - name: "products"
     label: "Products"
     label_singular: "Product"
@@ -37,8 +54,9 @@ collections:
       - { label: "Price", name: "price", widget: "number" }
       - { label: "Image", name: "image", widget: "image" }
 
-  - name: "config"
-    label: "Site Navigation & Footer"
+  # Navigation and footer config (src/config.json)
+  - name: "site_config"
+    label: "Site Config"
     files:
       - file: "src/config.json"
         label: "Navigation & Footer"
@@ -46,7 +64,14 @@ collections:
         fields:
           - { label: "Header Links", name: "headerLinks", widget: "list", fields: [
                 { label: "Label", name: "menuLabel", widget: "string" },
-                { label: "URL", name: "menuLink", widget: "string" }
+                { label: "URL", name: "menuLink", widget: "string" },
+                { label: "Category", name: "category", widget: "list", required: false, fields: [
+                    { label: "Category Label", name: "categoryLabel", widget: "string" },
+                    { label: "Submenu", name: "submenu", widget: "list", fields: [
+                        { label: "Menu Label", name: "menuLabel", widget: "string" },
+                        { label: "Menu Link", name: "menuLink", widget: "string" }
+                    ]}
+                ]}
             ]
           }
           - { label: "Footer Links", name: "footerLinks", widget: "list", fields: [
@@ -58,9 +83,19 @@ collections:
             ]
           }
 
-  # Add more collections as needed for blog, settings, etc.
+  # Theme (brand colors, fonts, etc. stored in src/components/Layout/Globals.css)
+  - name: "theme"
+    label: "Theme Styles"
+    files:
+      - file: "src/components/Layout/Globals.css"
+        label: "Global CSS"
+        name: "globals_css"
+        fields:
+          - { label: "CSS Variables", name: "css", widget: "code", default_language: "css" }
 
-# Optional: inject your CSS to match the theme (Decap CMS supports custom styles)
+  # Optionally: Add custom content types like blog, testimonials, etc. by adding new collections
+
+# CMS appearance (optional)
 editor:
   preview: false
   styles:
