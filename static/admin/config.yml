@@ -111,7 +111,6 @@ collections:
     folder: "src/components"
     create: true
     extension: "js"
-    format: "file"
     slug: "{{slug}}"
     fields:
       - { label: "Component Name", name: "name", widget: "string" }
@@ -123,7 +122,6 @@ collections:
     folder: "src/helpers"
     create: true
     extension: "js"
-    format: "file"
     slug: "{{slug}}"
     fields:
       - { label: "Helper Name", name: "name", widget: "string" }
