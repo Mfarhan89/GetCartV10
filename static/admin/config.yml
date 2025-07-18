@@ -105,12 +105,13 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
 
-  - name: "components"
+ - name: "components"
     label: "Components"
     label_singular: "Component"
     folder: "src/components"
     create: true
     extension: "js"
+    format: "file"
     slug: "{{slug}}"
     fields:
       - { label: "Component Name", name: "name", widget: "string" }
@@ -122,6 +123,7 @@ collections:
     folder: "src/helpers"
     create: true
     extension: "js"
+    format: "file"
     slug: "{{slug}}"
     fields:
       - { label: "Helper Name", name: "name", widget: "string" }
